@@ -13,14 +13,13 @@ export default function HomeScreen() {
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           {
             title: "Location Permission",
-            message: "This app needs access to your location.",
+            message: "This app needs access to your location to show nearby POIs",
             buttonNeutral: "Ask Me Later",
             buttonNegative: "Cancel",
             buttonPositive: "OK",
           }
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log("Didier")
           getLocation();
         } else {
           console.log("Location permission denied");
@@ -31,10 +30,12 @@ export default function HomeScreen() {
     };
 
     const getLocation = () => {
+      console.log("la fct getLocation est appellée")
       Geolocation.watchPosition(
         (position) => {
-          setLocation(position.coords);
-          console.log(location)
+          console.log('frie ')
+          console.log(position);
+          //setLocation(position.coords);
         },
         (error) => {
           console.error(error);
