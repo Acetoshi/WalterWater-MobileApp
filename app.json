@@ -20,7 +20,15 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.acetoshi.WaterCompass"
+      "package": "com.acetoshi.walterwater",
+      "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Walter Water to use your location."
+        }
+      ]
+    ]
     },
     "web": {
       "bundler": "metro",
