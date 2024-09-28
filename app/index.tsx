@@ -48,20 +48,12 @@ export default function App() {
     : "";
 
   return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>{text}</Text>
-        <Text style={styles.paragraph}>{"jimbo"}</Text>
-      </View>
       <WebView
-        style={styles.webview}
-        source={{ uri: "http://walterwater.vercel.app/" }}
-        injectedJavaScript={injectedJavaScript}
+        source={{ uri: "https://walterwater.vercel.app/" }}
       />
-    </>
   );
 }
-
+//injectedJavaScript={injectedJavaScript} 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
