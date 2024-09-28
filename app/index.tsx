@@ -1,13 +1,13 @@
-// import { WebView } from 'react-native-webview';
+import { WebView } from "react-native-webview";
 
 // export default function HomeScreen() {
 //   return <WebView source={{ uri: "https://walterwater.vercel.app/" }} />;
 // }
 
-import { useState, useEffect } from 'react';
-import { Platform, Text, View, StyleSheet } from 'react-native';
-import * as Device from 'expo-device';
-import * as Location from 'expo-location';
+import { useState, useEffect } from "react";
+import { Platform, Text, View, StyleSheet } from "react-native";
+import * as Device from "expo-device";
+import * as Location from "expo-location";
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -15,15 +15,15 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      if (Platform.OS === 'android' && !Device.isDevice) {
+      if (Platform.OS === "android" && !Device.isDevice) {
         setErrorMsg(
-          'Oops, this will not work on Snack in an Android Emulator. Try it on your device!'
+          "Oops, this will not work on Snack in an Android Emulator. Try it on your device!"
         );
         return;
       }
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
         return;
       }
 
@@ -32,7 +32,7 @@ export default function App() {
     })();
   }, []);
 
-  let text = 'Waiting..';
+  let text = "Waiting..";
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
@@ -40,22 +40,27 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.paragraph}>{text}</Text>
-    </View>
+    <>
+      <View style={styles.container}>
+        <Text style={styles.paragraph}>{text}</Text>
+      </View>
+      <WebView style={styles.webview} source={{ uri: "https://walterwater.vercel.app/" }} />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 0,
   },
   paragraph: {
     fontSize: 18,
-    textAlign: 'center',
+    textAlign: "center",
   },
+  webview: {
+    height:27,
+  }
 });
-
