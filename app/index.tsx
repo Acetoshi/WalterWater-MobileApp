@@ -23,7 +23,6 @@ export default function App() {
         return;
       }
 
-
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
@@ -35,6 +34,7 @@ export default function App() {
     })();
   }, []);
 
+  // TODO : remove this dev bit
   let text = "Waiting..";
   if (errorMsg) {
     text = errorMsg;
@@ -42,12 +42,22 @@ export default function App() {
     text = JSON.stringify(location);
   }
 
+  // Inject the location into WebView
+  const injectedJavaScript = location
+    ? `window.dispatchEvent(new CustomEvent('locationReceived', { detail: { latitude: ${location.latitude}, longitude: ${location.longitude} }}));`
+    : "";
+
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.paragraph}>{text}</Text>
+        <Text style={styles.paragraph}>{"jimbo"}</Text>
       </View>
-      <WebView style={styles.webview} source={{ uri: "https://walterwater.vercel.app/" }} />
+      <WebView
+        style={styles.webview}
+        source={{ uri: "http://walterwater.vercel.app/" }}
+        injectedJavaScript={injectedJavaScript}
+      />
     </>
   );
 }
@@ -64,6 +74,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   webview: {
-    height:27,
-  }
+    height: 27,
+  },
 });
